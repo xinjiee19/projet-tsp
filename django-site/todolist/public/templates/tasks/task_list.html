@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}Liste des tâches{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1>To-Do List</h1>
+        <a href="{% url 'task_create' %}" class="button-link">Créer une nouvelle tâche</a>
+
+        <div class="task-header">
+            <span>Tâches</span>
+            <span>Date d'échéance</span>
+            <span>Actions</span>
+        </div>
+
+        <ul>
+            {% for task in tasks %}
+                <li class="{% if task.completed %}completed-task{% endif %}">
+                    <span>{{ task.title }} - {{ task.description }}</span>
+                    <span>{{ task.due_date|date:"d/m/Y" }}</span>
+                    <div class="task-actions">
+                        <a href="{% url 'task_update' task.pk %}" class="edit-btn">Modifier</a>
+                        <a href="{% url 'task_delete' task.pk %}" class="delete-btn">Supprimer</a>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <!-- Ajouter un conteneur pour le calendrier -->
+        <h2>Calendrier</h2>
+        <div id='calendar'></div> <!-- Le calendrier sera inséré ici -->
+    </div>
+{% endblock %}
+
+<!--
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            locale: 'fr',
+            events: [
+                {% for task in tasks %}
+                    {
+                        title: '{{ task.title }}',
+                        start: '{{ task.due_date }}',
+                        backgroundColor: '{% if task.completed %}green{% else %}red{% endif %}',  // Vert si complété, rouge sinon
+                    },
+                {% endfor %}
+            ]
+        });
+        calendar.render();
+    });
+</script>
+{% endblock %}
+-->

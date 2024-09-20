@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}Supprimer la tâche{% endblock %}
+
+{% block content %}
+    <h1>Voulez-vous vraiment supprimer la tâche "{{ task.title }}" ?</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit">Confirmer la suppression</button>
+    </form>
+    <a href="{% url 'task_list' %}">Annuler</a>
+{% endblock %}

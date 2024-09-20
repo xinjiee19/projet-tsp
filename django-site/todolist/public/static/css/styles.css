@@ -1,0 +1,167 @@
+/* Global Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Title */
+h1 {
+    text-align: center;
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 30px;
+}
+
+/* Button styles */
+button, .button-link {
+    background-color: #007BFF;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 5px;
+    border: none;
+    text-decoration: none;
+    font-size: 16px;
+    display: inline-block;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    text-align: center;
+}
+
+button:hover, .button-link:hover {
+    background-color: #0056b3;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* Form Styles */
+form {
+    margin-top: 20px;
+}
+
+form input, form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+form button {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+}
+
+/* Task List */
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    background-color: #f1f1f1;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Barre uniquement le texte des tâches et des dates */
+li.completed-task span {
+    text-decoration: line-through;  /* Barre seulement le texte dans les <span> */
+}
+
+li.completed-task {
+    background-color: #d4edda;  /* Couleur de fond pour les tâches complétées */
+}
+
+
+li .task-actions {
+    display: flex;
+}
+
+/* Task action buttons with white text */
+.task-actions a {
+    margin-left: 10px;
+    padding: 8px 12px;
+    border-radius: 4px;
+    color: white;  /* Texte blanc pour les boutons */
+}
+
+.task-actions .edit-btn {
+    background-color: #28a745;
+}
+
+.task-actions .delete-btn {
+    background-color: #dc3545;
+}
+
+.task-actions .edit-btn:hover {
+    background-color: #218838;
+}
+
+.task-actions .delete-btn:hover {
+    background-color: #c82333;
+}
+
+/* Style pour aligner les en-têtes */
+.task-header {
+    display: grid;
+    grid-template-columns: 2fr 20fr 1fr;  /* Ajuster les colonnes pour avoir le bon alignement */
+    padding: 10px;
+    font-weight: bold;
+    font-size: 18px;
+    color: #333;
+    text-align: left;
+}
+
+/* Alignement des éléments dans les lignes de tâches */
+li {
+    display: grid;
+    grid-template-columns: 2fr 4fr 1fr;  /* Correspondance des colonnes avec les en-têtes */
+    align-items: center;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    background-color: #f1f1f1;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+li span {
+    text-align: left;
+}
+
+.task-header span:nth-child(2), li span:nth-child(2) {
+    text-align: center;  /* Centrer les dates */
+}
+
+.task-header span:nth-child(3), li .task-actions {
+    text-align: right;  /* Aligner les actions à droite */
+}
+
+/* Actions */
+.task-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;  /* Espacer les boutons */
+}
+

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}{% if form.instance.pk %}Modifier{% else %}Créer{% endif %} une tâche{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1>{% if form.instance.pk %}Modifier{% else %}Créer{% endif %} une tâche</h1>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}  <!-- Le champ due_date sera inclus automatiquement -->
+            <button type="submit">{% if form.instance.pk %}Mettre à jour{% else %}Créer{% endif %} la tâche</button>
+        </form>
+        <a href="{% url 'task_list' %}" class="button-link">Retour à la liste</a>
+    </div>
+{% endblock %}

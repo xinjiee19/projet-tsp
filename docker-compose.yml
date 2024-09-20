@@ -1,1 +1,72 @@
-# Créez ici votre docker compose
+version: '3'
+
+services:
+  # Base de données PostgreSQL
+  db:
+    container_name: postgressql
+    image: postgres
+    environment:
+      POSTGRES_DB: todolist
+      POSTGRES_USER: xinjie
+      POSTGRES_PASSWORD: xinjie
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - webnet
+
+  # Application frontend Django
+  frontend:
+    container_name: frontend
+    build:
+      context: .
+      dockerfile: django-site/todolist/public/Dockerfile.front
+    ports:
+      - "8001:5000"
+    environment:
+      - DATABASE_URL=postgres://xinjie:xinjie@db:5432/todolist
+    depends_on:
+      - db
+    networks:
+      - webnet
+    command: python3 manage.py runserver 0.0.0.0:5000
+
+  # Application API Django
+  api:
+    container_name: api
+    build:
+      context: .
+      dockerfile: django-site/todolist/api/Dockerfile.api
+    ports:
+      - "8002:5000"
+    environment:
+      - DATABASE_URL=postgres://xinjie:xinjie@db:5432/todolist
+    depends_on:
+      - db
+    networks:
+      - webnet
+    command: python3 manage.py runserver 0.0.0.0:5000
+
+  # Serveur Nginx
+  proxy:
+    container_name: nginx
+    image: nginx
+    ports:
+      - "80:80"
+    depends_on:
+      - frontend
+      - api
+    volumes:
+      - ./django-site/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./django-site/nginx/access.log:/var/log/nginx/access.log
+    networks:
+      - webnet
+
+# Définir les volumes pour la base de données
+volumes:
+  postgres_data:
+
+# Réseau Docker
+networks:
+  webnet:
