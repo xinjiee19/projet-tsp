@@ -8,5 +8,5 @@
         {% csrf_token %}
         <button type="submit">Confirmer la suppression</button>
     </form>
-    <a href="{% url 'task_list' %}">Annuler</a>
+    <a href="{% url 'task_list' %}" class="button-link">Annuler</a>
 {% endblock %}
