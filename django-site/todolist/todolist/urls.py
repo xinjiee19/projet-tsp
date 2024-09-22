@@ -18,11 +18,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.http import HttpResponseRedirect
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path('tasks/', include('public.urls')),
     path('api/', include('api.urls')),
-    path('/', lambda request: HttpResponseRedirect('tasks/')),  
+    path('', lambda request: HttpResponseRedirect('tasks/')),  
 
 ]
+
+

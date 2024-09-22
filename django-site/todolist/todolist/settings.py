@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-fc1#7#pys+hr5qemcf)s(p@yt6v4&0^8fixywcs1pl-r)rht2%"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'frontend', 'proxy', 'api']
 
 
 # Application definition
@@ -132,16 +132,16 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATICFILES_DIRS = [
-    BASE_DIR / 'static',
-]
+
+
 
 STATIC_URL = "/static/"
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'public', 'static'),
+    os.path.join(BASE_DIR, 'public', 'static'),  # This is where your styles.css file is located
 ]
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'public', 'staticfiles')  # Collectstatic destination
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
