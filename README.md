@@ -5,104 +5,149 @@
 
 # CSC 8567 - Architectures distribuées et applications web
 
-Auteurs : Timothée Mathubert, Gatien Roujanski, Arthur Jovart
+Auteur : Xin Jie CHENG
 
-## Emails
-
-Lorsque vous envoyez un mail, pensez bien à mettre "CSC 8567" au début de l'objet !
-- timothee.mathubert@telecom-sudparis.eu
-- gatien.roujanski@telecom-sudparis.eu
-- arthur.jovart@telecom-sudparis.eu
-
-## Consignes
-
-1. **Allez avant tout à la rubrique "Installation" ci-dessous pour installer ce dont vous aurez besoin pour le cours !**
-
-2. Formez des groupes en trinômes, les plus hétérogènes possibles en niveau, et communiquez votre groupe à un enseignant.
-
-3. **Ce cours est exclusivement un cours-projet : il n'y aura pas d'examen à la fin.** En revanche, il y aura deux rendus de projet (24 septembre et 21 novembre) ainsi qu'une soutenance à la fin du cours (21 novembre).
-
-4. Vous pouvez faire le projet que vous souhaitez sous certaines conditions :
-- **Vous devez disposer de deux applications Django**, une pour **un frontend** et l'autre pour **une API retournant des données au format JSON**. 
-- Votre site web doit être accessible depuis votre interface loopback (sur l'IP 127.0.0.1) de votre PC, et contenir au moins deux pages : une pour faire des requêtes à l'API, l'autre pour afficher une liste d'objets.
-- **Votre site doit utiliser une base de données non locale (pas de fichier).** Celle-ci doit contenir un schéma relationnel de données similaire à celui ci-dessous :
-
-<p align="center">
-    <img src="https://github.com/user-attachments/assets/4cd224f5-5f64-48b7-bd6f-c25f301275ca" alt="BDD">
-</p>
-
-- Pour le rendu du 24 septembre, vous devez déployer une infrastructure similaire à celle ci-dessous en utilisant un fichier `docker-compose.yml` et des Dockerfiles. **L'application Django de l'API et du frontend devront être placées dans deux conteneurs différents. La base de données et le proxy seront dans deux conteneurs différents.**
-
-<p align="center">
-    <img src="https://github.com/user-attachments/assets/877dfc8f-ae0b-41e0-a934-19480d839d0c" alt="Infra à reproduire">
-</p>
-
-- Pour vous aider tout au long du projet, __**consultez ces différentes pages de documentation et demandez de l'aide aux enseignants**__ :
-    - Django : https://docs.djangoproject.com/en/5.1/
-    - Docker : https://docs.docker.com/manuals/ 
-    - Kubernetes (rendu final seulement) : https://kubernetes.io/fr/docs/home/
-    - Nginx (Proxy) : https://nginx.org/en/docs/
-- *Vous pouvez ajouter des applications, ajouter de la forme (Styles CSS, Bootstrap, Bulma) et des pages supplémentaires si vous le souhaitez.*
-- Les consignes pour le rendu final avec Kubernetes vous seront communiquées après le rendu du CC Django + Docker.
-
-
-## Installation
-
-**Il est recommandé d'utiliser un système d'exploitation type Linux.**
-L'installation suivante fonctionne sous Ubuntu. En fonction de votre OS, il est possible qu'apt ne soit pas le gestionnaire de paquets. Remplacez simplement apt dans les commandes suivantes par votre gestionnaire de paquets.
-
-1. Créez votre propre répo de groupe en cliquant sur "Use this template"
-   
-2. Créer un environnement virtuel Python avec Pyenv (non nécessaire si vous avez déjà un gestionnaires d'environnements virtuels pour Python)
+# Fonctionnement de Django 
+### Suite de requêtes et d'exécutions permettant l'affichage d'une page HTML index.html à l'URL global / via une application public
+Lorsque l'utilisateur accède à l'URL `/`, une requête HTTP GET est envoyé au serveur Django. Django va utiliser le fichier `urls.py` pour faire correspondre l'URL à une vue. 
+Par exemple : 
 ```
-sudo apt install pyenv
-sudo apt install python
-sudo apt install pip
-```
-Si vous utilisez Bash comme exécuteur de commande dans votre Shell :
-```
-echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
-echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
-echo 'eval "$(pyenv init -)"' >> ~/.bashrc
-```
-Si vous utilisez autre chose, allez voir la [documentation Pyenv](https://github.com/pyenv/pyenv?tab=readme-ov-file#set-up-your-shell-environment-for-pyenv).
+# urls.py
+from django.urls import path
+from . import views
+urlpatterns = [
+    path('', views.index, name='index'),
+]
 
-Ensuite :
-```
-pyenv install 3.12
-```
-3. Installer les dépendances utiles
-```
-pip install django psycopg2-binary
-```
-4. Créer le projet Django & vérifier qu'il tourne correctement
-```
-cd django-site
-django-admin startproject [nom-de-votre-projet] <-- A REMPLACER
-python manage.py runserver
-```
-Allez sur 127.0.0.1:8000 sur un navigateur. Si une page "Congratulations!" s'affiche, c'est que tout fonctionne bien !
+# views.py
+from django.shortcuts import render
 
-5. Créer les applications utiles
+def index(request):
+    return render(request, 'public/index.html')
 ```
-python manage.py startapp public
-python manage.py startapp api
+La vue `index` est appelée et cette vue va retourner une HTML comme réponse. Django va chercher le fichier index.html dans le répertoire `templates`. 
+Le contenu HTML du fichier index.html est envoyé en réponse à la requête du client.
+
+### Configuration de la base des données dans un projet Django
+On peut configurer la base des données dans la section `DATABASES` du fichier `settings.py`.
+Exemple pour une configuration de base des données PostgreSQL: 
+```
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'todolist',  # Nom de la base de données PostgreSQL
+        'USER': 'xinjie',      # Nom de l'utilisateur PostgreSQL
+        'PASSWORD': 'xinjie',  # Mot de passe de l'utilisateur
+        'HOST': 'db',   # Hôte de la base de données (localhost si local)
+        'PORT': '5432',        # Port par défaut de PostgreSQL
+    }
+}
 ```
 
-6. Installer Docker
-```
-sudo apt install docker
-docker -v
-```
-Si la dernière commande vous affiche la version de Docker, c'est qu'il est correctement installé.
+### Configuration du fichier de paramètres dans un projet Django
+Pour configurer le fichier des paramètres, on peut l'effectuer dans le fichier `settings.py`.
+Ce fichier contient tous les paramètres de configuration pour un projet Django.
+Par exemple, définir la base des données utilisée, lister des applications installées dans le projet, configurer des répertoires de templates, etc.
 
-7. Créer un compte Docker Hub
+### Effets des commandes makemigrations et migrate
+python3 manage.py makemigrations : Cette commande crée des fichiers de migration pour toutes les modifications apportées aux modèles Django (ajout, suppression, etc.).
+Elle génère un fichier de migration dans le dossier migrations de chaque application où des changements ont été détectés. 
+Ces fichiers contiennent les instructions pour mettre à jour la structure de la base de données afin qu'elle corresponde aux modèles définis dans `models.py`.
 
-Allez sur https://hub.docker.com et créez vous un compte.
+python3 manage.py migrate : Cette commande applique les migrations à la base de données, c’est-à-dire qu’elle exécute les changements définis dans les fichiers de migration.
+Cette commande lit les fichiers de migration dans le répertoire `migrations`. Elle met à jour la base de données réelle en fonction des instructions dans les migrations.
 
-8. Installer kubectl
+
+# Fonctionnement de Docker
+### Commandes dans un fichier Dockerfile
+- `FROM` : Déclare l'image de base à utiliser pour créer votre conteneur. Cette image de base contient généralement un système d'exploitation minimal ou un environnement spécifique.
+- `RUN` : Exécute une commande dans le conteneur au moment de la création de l'image. Généralement utilisé pour installer des packages ou exécuter des scripts.
+- `WORKDIR` : Définit le répertoire de travail (current directory) à l'intérieur du conteneur. Les commandes suivantes (comme RUN, COPY, etc.) se basent sur ce répertoire.
+- `EXPOSE` : Informe Docker qu'un conteneur écoute sur un certain port à l'intérieur du conteneur.
+- `CMD` : Définit la commande par défaut à exécuter lorsque le conteneur démarre.
+
+### Éléments du fichier `docker-compose.yml`
+- `ports: - "80:80"` : Mappe le port 80 de la machine hôte au port 80 du conteneur. Cela permet à l'utilisateur d'accéder au service à partir de l'hôte via le port 80. Le service dans le conteneur écoute également sur le port 80.
+- `build` : Définit la façon dont l'image Docker sera construite.
+  Exemple :
+  ```
+  build:
+    context: .
+    dockerfile: Dockerfile.api
+  ```
+  `context` indique le répertoire à partir duquel le build sera exécuté (dans ce cas, le répertoire courant), et dockerfile spécifie quel Dockerfile utiliser pour construire l'image  (dans ce cas, Dockerfile.api).
+- `depends_on` : Assure que les services nécessaires démarrent dans le bon ordre. Cela signifie que Docker Compose s'assurera que les services spécifiés dans `depends_on` démarrent avant le service.
+- `environment` : Définit les variables d'environnement dans le conteneur.
+
+### Méthode pour définir des variables d'environnement dans un conteneur
+Pour définir les variables d'environnement, on peut utiliser un fichier `.env`. 
+Les variables définies dans le fichier .env seront automatiquement chargées dans le conteneur lors il est démarré.
+Par exemple : 
 ```
-sudo apt install kubectl
+# .env
+POSTGRES_DB=mydatabase
+POSTGRES_USER=myuser
+POSTGRES_PASSWORD=mypassword
+
+# docker-compose.yml
+env_file:
+  - .env
+```
+### Configuration d'un conteneur web et nginx dans le même réseau Docker
+L'objectif est de faire en sorte que Nginx (utilisé comme serveur proxy) redirige les requêtes vers l'application Django exécutée sur un autre conteneur (web) dans le même réseau Docker. 
+Dans le fichier `nginx.conf`, on configure le proxy inverse pour rediriger le trafic vers le conteneur web. 
+
+```
+# nginx.conf
+server {
+  listen 80;
+  location / {
+    proxy_read_timeout      1800;
+    proxy_connect_timeout   1800;
+    proxy_send_timeout      1800;
+    send_timeout            1800;
+    proxy_set_header        Accept-Encoding   "";
+    proxy_set_header        X-Forwarded-By    $server_addr:$server_port;
+    proxy_set_header        X-Forwarded-For   $remote_addr;
+    proxy_set_header        X-Forwarded-Proto $scheme;
+    proxy_set_header        Host $host;
+    proxy_set_header        X-Real-IP $remote_addr;
+    proxy_pass http://backend;
+  }
+```
+```
+  # Application frontend Django
+  frontend:
+    container_name: frontend
+    build:
+      context: .
+      dockerfile: django-site/todolist/public/Dockerfile.front
+    ports:
+      - "8001:8000"
+    environment:
+      - DATABASE_URL=postgres://xinjie:xinjie@db:5432/todolist
+    depends_on:
+      - db
+    networks:
+      - webnet
+    command: python3 manage.py runserver 0.0.0.0:8000
+
+# Serveur Nginx
+  proxy:
+    container_name: nginx
+    image: nginx
+    ports:
+      - "80:80"
+    depends_on:
+      - frontend
+      - api
+    volumes:
+      - ./django-site/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./django-site/nginx/access.log:/var/log/nginx/access.log
+      - ./django-site/todolist/public/staticfiles:/projet-web-tsp/django-site/todolist/public/staticfiles
+    networks:
+      - webnet
 ```
 
-Et c'est parti !
+Cette configuration fait en sorte que Nginx redirige les requêtes HTTP qu'il reçoit sur le port 80 vers le service Django exécuté sur le conteneur web, sur le port 8000.
+
