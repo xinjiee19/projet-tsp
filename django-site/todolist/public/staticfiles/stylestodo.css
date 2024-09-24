@@ -1,71 +1,90 @@
 /* Global Styles */
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f9f9f9;
+    font-family: 'Roboto', sans-serif;  /* Upgraded to a modern font */
+    background-color: #f5f5f5;
     margin: 0;
     padding: 20px;
+    color: #333;
 }
 
 .container {
-    max-width: 800px;
+    max-width: 900px;
     margin: 0 auto;
-    background-color: white;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);  /* Slightly larger shadow */
+    transition: box-shadow 0.3s ease;
+}
+
+.container:hover {
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);  /* Hover effect for added elegance */
 }
 
 /* Title */
 h1 {
     text-align: center;
-    color: #333;
-    font-size: 24px;
-    margin-bottom: 30px;
+    color: #2c3e50;
+    font-size: 30px;
+    margin-bottom: 40px;
+    letter-spacing: 1px;  /* Slight letter spacing for elegance */
 }
 
 /* Button styles */
 button, .button-link {
-    background-color: #007BFF;
+    background-color: #3498db;  /* Softer, sophisticated blue */
     color: white;
-    padding: 12px 20px;
-    border-radius: 5px;
+    padding: 14px 24px;
+    border-radius: 6px;
     border: none;
-    text-decoration: none;
-    font-size: 16px;
+    font-size: 18px;
     display: inline-block;
     margin-top: 10px;
     margin-bottom: 20px;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease;
     cursor: pointer;
     text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* Button shadow for depth */
 }
 
 button:hover, .button-link:hover {
-    background-color: #0056b3;
+    background-color: #2980b9;  /* Slightly darker on hover */
+    transform: translateY(-3px);  /* Button hover effect */
 }
 
 a {
     text-decoration: none;
+    color: #3498db;
+}
+
+a:hover {
+    text-decoration: underline;
 }
 
 /* Form Styles */
 form {
-    margin-top: 20px;
+    margin-top: 30px;
 }
 
 form input, form textarea {
     width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
+    padding: 14px;
+    margin-bottom: 20px;
     border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 14px;
+    border-radius: 6px;
+    font-size: 16px;
+    background-color: #f9f9f9;
+    transition: border 0.3s ease;
+}
+
+form input:focus, form textarea:focus {
+    border-color: #3498db;  /* Subtle focus effect */
 }
 
 form button {
     width: 100%;
-    padding: 12px;
-    font-size: 16px;
+    padding: 14px;
+    font-size: 18px;
 }
 
 /* Task List */
@@ -76,92 +95,129 @@ ul {
 }
 
 li {
-    background-color: #f1f1f1;
-    padding: 15px;
-    border-radius: 5px;
-    margin-bottom: 10px;
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 15px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.05);
+    transition: box-shadow 0.3s ease;
 }
 
-/* Barre uniquement le texte des tâches et des dates */
-li.completed-task span {
-    text-decoration: line-through;  /* Barre seulement le texte dans les <span> */
+li:hover {
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
 }
 
+/* Completed Task */
 li.completed-task {
-    background-color: #d4edda;  /* Couleur de fond pour les tâches complétées */
+    background-color: #e9f7ef;  /* Softer green for completed tasks */
 }
 
+li.completed-task span {
+    text-decoration: line-through;
+}
 
+/* Task Actions */
 li .task-actions {
     display: flex;
+    gap: 12px;
 }
 
-/* Task action buttons with white text */
 .task-actions a {
-    margin-left: 10px;
-    padding: 8px 12px;
-    border-radius: 4px;
-    color: white;  /* Texte blanc pour les boutons */
+    padding: 10px 15px;
+    border-radius: 6px;
+    color: white;
+    font-size: 14px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .task-actions .edit-btn {
-    background-color: #28a745;
+    background-color: #27ae60;
 }
 
 .task-actions .delete-btn {
-    background-color: #dc3545;
+    background-color: #e74c3c;
 }
 
 .task-actions .edit-btn:hover {
-    background-color: #218838;
+    background-color: #2ecc71;
+    transform: translateY(-2px);
 }
 
 .task-actions .delete-btn:hover {
-    background-color: #c82333;
+    background-color: #c0392b;
+    transform: translateY(-2px);
 }
 
-/* Style pour aligner les en-têtes */
+/* Task Header */
 .task-header {
     display: grid;
-    grid-template-columns: 2fr 20fr 1fr;  /* Ajuster les colonnes pour avoir le bon alignement */
-    padding: 10px;
+    grid-template-columns: 2fr 20fr 1fr;
+    padding: 15px;
     font-weight: bold;
-    font-size: 18px;
-    color: #333;
-    text-align: left;
+    font-size: 20px;
+    color: #2c3e50;
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #ddd;
 }
 
-/* Alignement des éléments dans les lignes de tâches */
 li {
     display: grid;
-    grid-template-columns: 2fr 4fr 1fr;  /* Correspondance des colonnes avec les en-têtes */
+    grid-template-columns: 2fr 4fr 1fr;
     align-items: center;
     padding: 15px;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    background-color: #f1f1f1;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.05);
-}
-
-li span {
-    text-align: left;
 }
 
 .task-header span:nth-child(2), li span:nth-child(2) {
-    text-align: center;  /* Centrer les dates */
+    text-align: center;
 }
 
 .task-header span:nth-child(3), li .task-actions {
-    text-align: right;  /* Aligner les actions à droite */
+    text-align: right;
 }
 
-/* Actions */
-.task-actions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;  /* Espacer les boutons */
+/* Calendar Styles */
+
+/* Weekday Names (e.g., Mon, Tue, etc.) */
+.fc-col-header-cell {
+    color: #555555;  /* Dark grey for weekday names */
+    font-weight: bold;
+}
+
+/* Calendar Dates */
+.fc-daygrid-day-number {
+    color: #555555;  /* Dark grey color for the calendar dates */
+    font-weight: bold;
+}
+
+/* Today's Date */
+.fc-day-today {
+    background-color: #ffeb3b;  /* Highlight today's date with yellow */
+    color: #333333;  /* Ensure good contrast */
+}
+
+/* Month/Year Header */
+.fc-header-toolbar h2 {
+    color: #333333;  /* Dark grey for the month/year header */
+}
+
+/* Week Numbers */
+.fc-daygrid-week-number {
+    color: #555555;  /* Dark grey for week numbers */
+    font-weight: bold;
+}
+
+/* Calendar Cell Borders */
+.fc-daygrid-day {
+    border: 1px solid #ddd;  /* Light border for each day */
+    padding: 10px;
+}
+
+/* Toolbar Title (Month and Year) */
+.fc-toolbar-title {
+    font-size: 1.5em;  /* Larger title for elegance */
+    color: #2c3e50;    /* Consistent with the page's theme */
 }
 

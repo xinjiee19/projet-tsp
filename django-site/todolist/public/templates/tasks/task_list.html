@@ -9,6 +9,7 @@
 
         <div class="task-header">
             <span>Tâches</span>
+            <span>Catégorie</span> <!-- Add category column -->
             <span>Date d'échéance</span>
             <span>Actions</span>
         </div>
@@ -17,6 +18,13 @@
             {% for task in tasks %}
                 <li class="{% if task.completed %}completed-task{% endif %}">
                     <span>{{ task.title }} - {{ task.description }}</span>
+                    <span>
+                        {% if task.category %}
+                            {{ task.category.name }}
+                        {% else %}
+                            No Category
+                        {% endif %}
+                    </span> <!-- Display category -->
                     <span>{{ task.due_date|date:"d/m/Y" }}</span>
                     <div class="task-actions">
                         <a href="{% url 'task_update' task.pk %}" class="edit-btn">Modifier</a>
@@ -28,30 +36,6 @@
 
         <!-- Ajouter un conteneur pour le calendrier -->
         <h2>Calendrier</h2>
-        <div id='calendar'></div> <!-- Le calendrier sera inséré ici -->
+        <div id='calendar'></div>
     </div>
 {% endblock %}
-
-<!--
-{% block scripts %}
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var calendarEl = document.getElementById('calendar');
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-            initialView: 'dayGridMonth',
-            locale: 'fr',
-            events: [
-                {% for task in tasks %}
-                    {
-                        title: '{{ task.title }}',
-                        start: '{{ task.due_date }}',
-                        backgroundColor: '{% if task.completed %}green{% else %}red{% endif %}',  // Vert si complété, rouge sinon
-                    },
-                {% endfor %}
-            ]
-        });
-        calendar.render();
-    });
-</script>
-{% endblock %}
--->

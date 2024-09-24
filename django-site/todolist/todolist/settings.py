@@ -91,7 +91,7 @@ DATABASES = {
         'NAME': 'todolist',  # Nom de la base de données PostgreSQL
         'USER': 'xinjie',      # Nom de l'utilisateur PostgreSQL
         'PASSWORD': 'xinjie',  # Mot de passe de l'utilisateur
-        'HOST': 'db',   # Hôte de la base de données (localhost si local)
+        'HOST': 'localhost',   # Hôte de la base de données (localhost si local)
         'PORT': '5432',        # Port par défaut de PostgreSQL
     }
 }
