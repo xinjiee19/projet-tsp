@@ -34,8 +34,38 @@
             {% endfor %}
         </ul>
 
-        <!-- Ajouter un conteneur pour le calendrier -->
+        <!-- Ajouter un conteneur pour le calendrier
         <h2>Calendrier</h2>
-        <div id='calendar'></div>
+        <div id="calendar"></div>  -->
     </div>
 {% endblock %}
+
+<!-- 
+{% block scripts %}
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+
+        // Convert tasks to FullCalendar events
+        var events = [
+            {% for task in tasks %}
+                {
+                    title: '{{ task.title }}',
+                    start: '{{ task.due_date }}',
+                    backgroundColor: '{% if task.completed %}green{% else %}red{% endif %}',  // Green for completed, red otherwise
+                },
+            {% endfor %}
+        ];
+
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            locale: 'fr', // Change locale to French
+            events: events // Attach the events array
+        });
+
+        calendar.render(); // Render the calendar
+    });
+</script>
+{% endblock %}
+-->

@@ -1,55 +1,55 @@
 /* Global Styles */
 body {
-    font-family: 'Roboto', sans-serif;  /* Upgraded to a modern font */
-    background-color: #f5f5f5;
+    font-family: 'Roboto', sans-serif;  
+    background-color: #f2f3f7;
     margin: 0;
     padding: 20px;
     color: #333;
 }
 
 .container {
-    max-width: 900px;
+    max-width: 1000px;  
     margin: 0 auto;
     background-color: #fff;
     padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);  /* Slightly larger shadow */
+    border-radius: 12px;  
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s ease;
 }
 
 .container:hover {
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);  /* Hover effect for added elegance */
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);  
 }
 
 /* Title */
 h1 {
     text-align: center;
     color: #2c3e50;
-    font-size: 30px;
-    margin-bottom: 40px;
-    letter-spacing: 1px;  /* Slight letter spacing for elegance */
+    font-size: 34px;  
+    margin-bottom: 50px;  
+    letter-spacing: 1.5px;  
 }
 
 /* Button styles */
 button, .button-link {
-    background-color: #3498db;  /* Softer, sophisticated blue */
+    background-color: #3498db;  
     color: white;
-    padding: 14px 24px;
-    border-radius: 6px;
+    padding: 16px 28px;  
+    border-radius: 8px;  
     border: none;
     font-size: 18px;
     display: inline-block;
-    margin-top: 10px;
-    margin-bottom: 20px;
+    margin-top: 15px;
+    margin-bottom: 25px;
     transition: background-color 0.3s ease, transform 0.2s ease;
     cursor: pointer;
     text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* Button shadow for depth */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);  
 }
 
 button:hover, .button-link:hover {
-    background-color: #2980b9;  /* Slightly darker on hover */
-    transform: translateY(-3px);  /* Button hover effect */
+    background-color: #0056b3;
+    transform: translateY(-3px);  
 }
 
 a {
@@ -68,22 +68,22 @@ form {
 
 form input, form textarea {
     width: 100%;
-    padding: 14px;
-    margin-bottom: 20px;
+    padding: 16px;  
+    margin-bottom: 25px;  
     border: 1px solid #ddd;
-    border-radius: 6px;
+    border-radius: 8px; 
     font-size: 16px;
     background-color: #f9f9f9;
     transition: border 0.3s ease;
 }
 
 form input:focus, form textarea:focus {
-    border-color: #3498db;  /* Subtle focus effect */
+    border-color: #007bff;  
 }
 
 form button {
     width: 100%;
-    padding: 14px;
+    padding: 16px;
     font-size: 18px;
 }
 
@@ -96,128 +96,113 @@ ul {
 
 li {
     background-color: #f8f9fa;
-    padding: 20px;
-    border-radius: 8px;
-    margin-bottom: 15px;
+    padding: 25px;  
+    border-radius: 10px;  
+    margin-bottom: 20px; 
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.05);
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.08);  
     transition: box-shadow 0.3s ease;
 }
 
 li:hover {
-    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
-}
-
-/* Completed Task */
-li.completed-task {
-    background-color: #e9f7ef;  /* Softer green for completed tasks */
-}
-
-li.completed-task span {
-    text-decoration: line-through;
+    box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.12);
 }
 
 /* Task Actions */
 li .task-actions {
     display: flex;
-    gap: 12px;
+    gap: 30px;  
+    justify-content: flex-end;
+    margin-right: 25px;  
 }
 
 .task-actions a {
-    padding: 10px 15px;
-    border-radius: 6px;
+    padding: 14px 20px;  
+    border-radius: 8px;
     color: white;
-    font-size: 14px;
+    font-size: 16px;
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .task-actions .edit-btn {
-    background-color: #27ae60;
+    background-color: #28a745;
 }
 
 .task-actions .delete-btn {
-    background-color: #e74c3c;
+    background-color: #dc3545;
 }
 
 .task-actions .edit-btn:hover {
-    background-color: #2ecc71;
+    background-color: #218838;
     transform: translateY(-2px);
 }
 
 .task-actions .delete-btn:hover {
-    background-color: #c0392b;
+    background-color: #c82333;
     transform: translateY(-2px);
 }
 
 /* Task Header */
 .task-header {
     display: grid;
-    grid-template-columns: 2fr 20fr 1fr;
+    grid-template-columns: 0.6fr 1fr 1fr 1.3fr;  
     padding: 15px;
     font-weight: bold;
     font-size: 20px;
     color: #2c3e50;
     background-color: #f8f9fa;
     border-bottom: 2px solid #ddd;
+    justify-items: center; 
 }
 
 li {
     display: grid;
-    grid-template-columns: 2fr 4fr 1fr;
+    grid-template-columns: 2fr 2fr 2fr 1fr;  
     align-items: center;
     padding: 15px;
+    justify-items: start;
+}
+
+/* Alignement du texte des colonnes */
+.task-header span:nth-child(1), li span:nth-child(1) {
+    text-align: left;
 }
 
 .task-header span:nth-child(2), li span:nth-child(2) {
-    text-align: center;
+    text-align: left;  
 }
 
-.task-header span:nth-child(3), li .task-actions {
-    text-align: right;
+.task-header span:nth-child(3), li span:nth-child(3) {
+    text-align: center;  
+}
+
+.task-header span:nth-child(4), li .task-actions {
+    text-align: right; 
 }
 
 /* Calendar Styles */
-
-/* Weekday Names (e.g., Mon, Tue, etc.) */
 .fc-col-header-cell {
-    color: #555555;  /* Dark grey for weekday names */
+    color: #555555;
     font-weight: bold;
 }
 
-/* Calendar Dates */
 .fc-daygrid-day-number {
-    color: #555555;  /* Dark grey color for the calendar dates */
+    color: #555555;
     font-weight: bold;
 }
 
-/* Today's Date */
 .fc-day-today {
-    background-color: #ffeb3b;  /* Highlight today's date with yellow */
-    color: #333333;  /* Ensure good contrast */
+    background-color: #ffeb3b;
+    color: #333333;
 }
 
-/* Month/Year Header */
 .fc-header-toolbar h2 {
-    color: #333333;  /* Dark grey for the month/year header */
+    color: #333333;
 }
 
-/* Week Numbers */
-.fc-daygrid-week-number {
-    color: #555555;  /* Dark grey for week numbers */
-    font-weight: bold;
-}
-
-/* Calendar Cell Borders */
-.fc-daygrid-day {
-    border: 1px solid #ddd;  /* Light border for each day */
-    padding: 10px;
-}
-
-/* Toolbar Title (Month and Year) */
 .fc-toolbar-title {
-    font-size: 1.5em;  /* Larger title for elegance */
-    color: #2c3e50;    /* Consistent with the page's theme */
+    font-size: 1.7em;  
+    color: #2c3e50;
 }
-

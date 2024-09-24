@@ -51,7 +51,7 @@ services:
   # Serveur Nginx
   proxy:
     container_name: nginx
-    image: nginx
+    image: nginx:latest
     ports:
       - "80:80"
     depends_on:
