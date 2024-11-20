@@ -206,3 +206,32 @@ li {
     font-size: 1.7em;  
     color: #2c3e50;
 }
+
+/* Styliser les boutons radio pour qu'ils ressemblent à des boutons */
+.inline-radio label {
+    display: inline-block;
+    margin-right: 10px;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+/* Ajouter un effet au survol */
+.inline-radio label:hover {
+    background-color: #e6e6e6;
+}
+
+/* Styliser les boutons sélectionnés */
+.inline-radio input[type="radio"]:checked + label {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+/* Masquer les vrais boutons radio */
+.inline-radio input[type="radio"] {
+    display: none;
+}

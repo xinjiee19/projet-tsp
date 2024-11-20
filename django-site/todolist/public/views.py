@@ -19,6 +19,7 @@ def task_create(request):
         form = TaskForm()
     return render(request, 'tasks/task_form.html', {'form': form})
 
+
 # Update an existing task
 def task_update(request, pk):
     task = get_object_or_404(Task, pk=pk)

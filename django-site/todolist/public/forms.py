@@ -9,5 +9,3 @@ class TaskForm(forms.ModelForm):
             'due_date': forms.DateInput(attrs={'type': 'date'}),
             'category': forms.Select(attrs={'id': 'category-select'}),  # Set the category field with an id
         }
-
-

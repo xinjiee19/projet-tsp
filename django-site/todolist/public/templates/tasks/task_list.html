@@ -9,7 +9,7 @@
 
         <div class="task-header">
             <span>Tâches</span>
-            <span>Catégorie</span> <!-- Add category column -->
+            <span>Catégorie</span>
             <span>Date d'échéance</span>
             <span>Actions</span>
         </div>
@@ -22,9 +22,9 @@
                         {% if task.category %}
                             {{ task.category.name }}
                         {% else %}
-                            No Category
+                            Sans catégorie
                         {% endif %}
-                    </span> <!-- Display category -->
+                    </span>
                     <span>{{ task.due_date|date:"d/m/Y" }}</span>
                     <div class="task-actions">
                         <a href="{% url 'task_update' task.pk %}" class="edit-btn">Modifier</a>

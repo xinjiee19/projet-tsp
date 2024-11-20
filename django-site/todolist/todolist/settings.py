@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
+from pathlib import Path
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,7 +28,8 @@ SECRET_KEY = "django-insecure-fc1#7#pys+hr5qemcf)s(p@yt6v4&0^8fixywcs1pl-r)rht2%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'frontend', 'proxy', 'api']
+
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost','localhost:8001', 'csc8567.luxbulb.org','django.girls.csc8567.luxbulb.org', 'frontend', 'proxy', 'api']
 
 
 # Application definition
@@ -44,13 +47,13 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    "django.middleware.security.SecurityMiddleware",
-    "django.contrib.sessions.middleware.SessionMiddleware",
-    "django.middleware.common.CommonMiddleware",
-    "django.middleware.csrf.CsrfViewMiddleware",
-    "django.contrib.auth.middleware.AuthenticationMiddleware",
-    "django.contrib.messages.middleware.MessageMiddleware",
-    "django.middleware.clickjacking.XFrameOptionsMiddleware",
+   "django.middleware.security.SecurityMiddleware",
+   "django.contrib.sessions.middleware.SessionMiddleware",
+   "django.middleware.common.CommonMiddleware",
+   # "django.middleware.csrf.CsrfViewMiddleware",
+   "django.contrib.auth.middleware.AuthenticationMiddleware",
+   "django.contrib.messages.middleware.MessageMiddleware",
+   "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
 ROOT_URLCONF = "todolist.urls"
@@ -83,7 +86,6 @@ DATABASES = {
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
-'''
 
 DATABASES = {
     'default': {
@@ -92,10 +94,13 @@ DATABASES = {
         'USER': 'xinjie',      # Nom de l'utilisateur PostgreSQL
         'PASSWORD': 'xinjie',  # Mot de passe de l'utilisateur
         'HOST': 'db',   # Hôte de la base de données (localhost si local)
-        'PORT': '5432',        # Port par défaut de PostgreSQL
-    }
-}
+'''
 
+DATABASES = {
+    'default': dj_database_url.config(
+        default=f"postgres://{os.getenv('POSTGRES_USER', 'xinjie')}:{os.getenv('POSTGRES_PASSWORD', 'xinjie')}@{os.getenv('DB_HOST', 'dbservice')}:5432/{os.getenv('POSTGRES_DB', 'todolist')}"
+    )
+}
 
 
 # Password validation

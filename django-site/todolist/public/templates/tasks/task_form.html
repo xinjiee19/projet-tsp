@@ -6,7 +6,6 @@
     <div class="container">
         <h1>{% if form.instance.pk %}Modifier{% else %}Créer{% endif %} une tâche</h1>
         <form method="POST" id="task-form">
-            {% csrf_token %}
             {{ form.as_p }}  <!-- This includes title, description, due_date, and category -->
                         
             <button type="submit">{% if form.instance.pk %}Mettre à jour{% else %}Créer{% endif %} la tâche</button>

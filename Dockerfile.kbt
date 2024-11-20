@@ -1,23 +1,24 @@
+# Utilisation d'une image de base légère Python
 FROM python:3.8-alpine
 
-# Set environment variables
+# Définir des variables d'environnement
 ENV PYTHONUNBUFFERED=1
 
-# Set the working directory
+# Définir le répertoire de travail
 WORKDIR /projet-web-tsp/django-site/todolist
 
-# Install system dependencies required for building packages like backports.zoneinfo
+# Installer les dépendances système requises
 RUN apk add --no-cache gcc musl-dev python3-dev libffi-dev
 
-# Copy the Django project files into the container
+# Copier les fichiers du projet Django dans le conteneur
 COPY ./django-site/todolist /projet-web-tsp/django-site/todolist
 
-# Install Python dependencies
+# Installer les dépendances Python
 RUN pip install --upgrade pip && \
     pip install -r ./requirements.txt
 
-# Exposer le port
+# Exposer le port sur lequel Django fonctionne
 EXPOSE 8000
 
-# Commande pour démarrer l'API
+# Commande pour démarrer le serveur Django
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
